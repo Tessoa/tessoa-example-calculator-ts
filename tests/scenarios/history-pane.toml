@@ -1,0 +1,54 @@
+name = "Opens the history beside the keys by its button or Ctrl+H, and keeps it and its bar after a restart"
+
+# Closed at first: the keys have the whole page.
+[[steps]]
+open-page = "calculator"
+expect-tree-contains = [
+  { key = "panes", count = 0 },
+  { key = "history", count = 0 },
+  { key = "toggle-history", kind = "icon-button", text = "Show history" },
+]
+
+[[steps]]
+click = "toggle-history"
+expect-tree-contains = [
+  { key = "history", in = "panes" },
+  { key = "display", in = "panes" },
+  { key = "toggle-history", text = "Hide history" },
+]
+expect-value = { key = "panes", value = 0.62 }
+
+[[steps]]
+key = "Ctrl+h"
+expect-tree-contains = [{ key = "panes", count = 0 }, { key = "toggle-history", text = "Show history" }]
+
+[[steps]]
+key = "Meta+h"
+expect-tree-contains = { key = "history", in = "panes" }
+
+# The page keeps where the user leaves the bar, also while the history is
+# closed.
+[[steps]]
+drag-split = { on = "panes", ratio = 0.7 }
+expect-value = { key = "panes", value = 0.7 }
+
+[[steps]]
+key = "Ctrl+h"
+expect-tree-contains = { key = "panes", count = 0 }
+
+[[steps]]
+key = "Ctrl+h"
+expect-value = { key = "panes", value = 0.7 }
+
+[[steps]]
+restart = true
+expect-tree-contains = { key = "history", in = "panes" }
+expect-value = { key = "panes", value = 0.7 }
+
+# Closed, it stays closed after a restart.
+[[steps]]
+click = "toggle-history"
+
+[[steps]]
+restart = true
+expect-tree-contains = { key = "panes", count = 0 }

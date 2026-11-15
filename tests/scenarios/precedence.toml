@@ -1,0 +1,63 @@
+name = "Multiplies and divides before it adds and subtracts"
+
+[[steps]]
+open-page = "calculator"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k3"
+
+[[steps]]
+click = "mul"
+
+[[steps]]
+click = "k4"
+expect-text = [{ key = "display", text = "4" }, { key = "expression", text = "2 + 3 × 4" }]
+
+[[steps]]
+click = "eq"
+expect-text = [{ key = "display", text = "14" }, { key = "expression", text = "2 + 3 × 4 =" }]
+
+# The same by key, with a division and a subtraction.
+[[steps]]
+key = "8"
+
+[[steps]]
+key = "-"
+
+[[steps]]
+key = "6"
+
+[[steps]]
+key = "/"
+
+[[steps]]
+key = "2"
+expect-text = { key = "expression", text = "8 − 6 ÷ 2" }
+
+[[steps]]
+key = "Enter"
+expect-text = { key = "display", text = "5" }
+
+# A minus after an operator is a sign.
+[[steps]]
+key = "2"
+
+[[steps]]
+key = "*"
+
+[[steps]]
+key = "-"
+
+[[steps]]
+key = "3"
+expect-text = { key = "expression", text = "2 × −3" }
+
+[[steps]]
+key = "="
+expect-text = { key = "display", text = "-6" }

@@ -24,14 +24,20 @@ expect-text = { key = "display", text = "-8" }
 
 [[steps]]
 click = "div"
+expect-text = { key = "expression", text = "-8 ÷" }
 
 [[steps]]
 click = "k0"
 
 [[steps]]
 click = "eq"
-expect-text = [{ key = "display", text = "Error" }, { key = "pending", text = "" }]
+expect-text = [{ key = "display", text = "Error" }, { key = "expression", text = "-8 ÷ 0 =" }]
+
+# There is nothing to go on from.
+[[steps]]
+click = "add"
+expect-text = [{ key = "display", text = "Error" }, { key = "expression", text = "-8 ÷ 0 =" }]
 
 [[steps]]
 key = "5"
-expect-text = { key = "display", text = "5" }
+expect-text = [{ key = "display", text = "5" }, { key = "expression", text = "5" }]

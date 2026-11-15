@@ -1,0 +1,111 @@
+name = "Puts an expression from the history back to be changed, and a result to go on from"
+
+[[steps]]
+open-page = "calculator"
+
+[[steps]]
+key = "Ctrl+h"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k3"
+
+[[steps]]
+click = "mul"
+
+[[steps]]
+click = "open"
+
+[[steps]]
+click = "k4"
+
+[[steps]]
+click = "sub"
+
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "eq"
+expect-text = [{ key = "h1-expr", text = "2 + 3 × (4 − 1)" }, { key = "h1-value", text = "= 11" }]
+
+# A click on the expression puts the whole of it back, whatever was being
+# typed, without working it out.
+[[steps]]
+click = "k9"
+
+[[steps]]
+click = "h1-expr"
+expect-text = [{ key = "expression", text = "2 + 3 × (4 − 1)" }, { key = "display", text = "1" }]
+
+# It can be changed and worked out again, as a new entry.
+[[steps]]
+click = "back"
+
+[[steps]]
+click = "back"
+expect-text = { key = "expression", text = "2 + 3 × (4 −" }
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "eq"
+expect-text = [{ key = "display", text = "8" }, { key = "expression", text = "2 + 3 × (4 − 2) =" }]
+expect-children = { key = "history", keys = ["h2", "h1"] }
+
+# A click on the result starts again from that number.
+[[steps]]
+click = "h1-value"
+expect-text = [{ key = "display", text = "11" }, { key = "expression", text = "2 + 3 × (4 − 1) =" }]
+
+[[steps]]
+click = "div"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "eq"
+expect-text = { key = "display", text = "5.5" }
+
+# An expression that began with a negative result reads back as it was.
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "sub"
+
+[[steps]]
+click = "k4"
+
+[[steps]]
+click = "eq"
+
+[[steps]]
+click = "mul"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "eq"
+expect-text = [{ key = "h5-expr", text = "-3 × 2" }, { key = "h5-value", text = "= -6" }]
+
+[[steps]]
+click = "h5-expr"
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k7"
+
+[[steps]]
+click = "eq"
+expect-text = [{ key = "display", text = "1" }, { key = "expression", text = "-3 × 2 + 7 =" }]

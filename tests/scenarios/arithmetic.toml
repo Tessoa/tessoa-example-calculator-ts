@@ -2,7 +2,7 @@ name = "Adds, multiplies and divides, by button and by key"
 
 [[steps]]
 open-page = "calculator"
-expect-text = [{ key = "display", text = "0" }, { key = "pending", text = "" }]
+expect-text = [{ key = "display", text = "0" }, { key = "expression", text = "" }]
 
 [[steps]]
 click = "k1"
@@ -14,19 +14,20 @@ expect-text = { key = "display", text = "12" }
 
 [[steps]]
 click = "add"
-expect-text = [{ key = "display", text = "12" }, { key = "pending", text = "12 +" }]
+expect-text = [{ key = "display", text = "12" }, { key = "expression", text = "12 +" }]
 
 [[steps]]
 key = "3"
-expect-text = { key = "display", text = "3" }
+expect-text = [{ key = "display", text = "3" }, { key = "expression", text = "12 + 3" }]
 
 [[steps]]
 key = "Enter"
-expect-text = [{ key = "display", text = "15" }, { key = "pending", text = "" }]
+expect-text = [{ key = "display", text = "15" }, { key = "expression", text = "12 + 3 =" }]
 
+# An operator after a result goes on from it.
 [[steps]]
 click = "mul"
-expect-text = { key = "pending", text = "15 ×" }
+expect-text = [{ key = "display", text = "15" }, { key = "expression", text = "15 ×" }]
 
 [[steps]]
 click = "k2"
@@ -41,7 +42,7 @@ expect-text = { key = "display", text = "2.5" }
 
 [[steps]]
 click = "eq"
-expect-text = { key = "display", text = "37.5" }
+expect-text = [{ key = "display", text = "37.5" }, { key = "expression", text = "15 × 2.5 =" }]
 
 [[steps]]
 click = "div"

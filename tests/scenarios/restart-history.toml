@@ -1,0 +1,62 @@
+name = "Keeps the history and the result shown after tessoa restarts"
+
+[[steps]]
+open-page = "calculator"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "mul"
+
+[[steps]]
+click = "k3"
+
+[[steps]]
+click = "eq"
+
+[[steps]]
+click = "k4"
+
+[[steps]]
+click = "sub"
+
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "eq"
+expect-text = { key = "last", text = "4 − 1 = 3" }
+
+[[steps]]
+restart = true
+expect-text = [
+  { key = "last", text = "4 − 1 = 3" },
+  { key = "display", text = "3" },
+  { key = "expression", text = "4 − 1 =" },
+]
+expect-tree-contains = { key = "history", count = 0 }
+
+[[steps]]
+click = "toggle-history"
+expect-children = { key = "history", keys = ["h2", "h1"] }
+expect-text = [
+  { key = "h1-expr", text = "2 × 3" },
+  { key = "h1-value", text = "= 6" },
+  { key = "h2-expr", text = "4 − 1" },
+  { key = "h2-value", text = "= 3" },
+]
+
+[[steps]]
+click = "h1-value"
+expect-text = { key = "display", text = "6" }
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "eq"
+expect-children = { key = "history", keys = ["h3", "h2", "h1"] }

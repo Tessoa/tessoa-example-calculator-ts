@@ -1,0 +1,50 @@
+name = "Shows the last calculation above the number while the history is closed"
+
+[[steps]]
+open-page = "calculator"
+expect-text = { key = "last", text = "" }
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k3"
+
+[[steps]]
+click = "eq"
+expect-text = { key = "last", text = "2 + 3 = 5" }
+
+# It stays while the next expression is typed.
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "div"
+expect-text = [{ key = "last", text = "2 + 3 = 5" }, { key = "expression", text = "12 ÷" }]
+
+[[steps]]
+click = "k4"
+
+[[steps]]
+click = "eq"
+expect-text = { key = "last", text = "12 ÷ 4 = 3" }
+
+# An error is not a calculation to keep.
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "div"
+
+[[steps]]
+click = "k0"
+
+[[steps]]
+click = "eq"
+expect-text = [{ key = "display", text = "Error" }, { key = "last", text = "12 ÷ 4 = 3" }]

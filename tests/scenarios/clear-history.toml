@@ -1,0 +1,44 @@
+name = "Clear history empties the history and leaves the calculation alone"
+
+[[steps]]
+open-page = "calculator"
+
+[[steps]]
+click = "toggle-history"
+expect-tree-contains = { key = "clear-history", disabled = true }
+
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k1"
+
+[[steps]]
+click = "eq"
+expect-children = { key = "history", keys = ["h1"] }
+expect-text = { key = "last", text = "1 + 1 = 2" }
+
+[[steps]]
+click = "clear-history"
+expect-children = { key = "history", keys = ["history-empty"] }
+expect-text = [
+  { key = "display", text = "2" },
+  { key = "expression", text = "1 + 1 =" },
+  { key = "last", text = "" },
+]
+expect-tree-contains = { key = "clear-history", disabled = true }
+
+# Entries after it are numbered on, so that a key never names two entries.
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "k3"
+
+[[steps]]
+click = "eq"
+expect-children = { key = "history", keys = ["h2"] }
+expect-text = [{ key = "h2-expr", text = "2 + 3" }, { key = "last", text = "2 + 3 = 5" }]

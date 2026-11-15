@@ -8,14 +8,14 @@ click = "k6"
 
 [[steps]]
 click = "mul"
-expect-text = { key = "pending", text = "6 ×" }
+expect-text = { key = "expression", text = "6 ×" }
 
 [[steps]]
 click = "k7"
 
 [[steps]]
 click = "eq"
-expect-text = [{ key = "display", text = "42" }, { key = "pending", text = "" }]
+expect-text = [{ key = "display", text = "42" }, { key = "expression", text = "6 × 7 =" }]
 
 [[steps]]
 click = "copy"

@@ -1,0 +1,35 @@
+name = "Closes the brackets still open when = is pressed"
+
+[[steps]]
+open-page = "calculator"
+
+[[steps]]
+click = "k2"
+
+[[steps]]
+click = "mul"
+
+[[steps]]
+click = "open"
+
+[[steps]]
+click = "k3"
+
+[[steps]]
+click = "add"
+
+[[steps]]
+click = "open"
+
+[[steps]]
+click = "k1"
+expect-text = { key = "expression", text = "2 × (3 + (1" }
+
+# The history keeps the expression with its brackets closed.
+[[steps]]
+click = "eq"
+expect-text = [
+  { key = "display", text = "8" },
+  { key = "expression", text = "2 × (3 + (1)) =" },
+  { key = "last", text = "2 × (3 + (1)) = 8" },
+]
